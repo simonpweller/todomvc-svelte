@@ -4,23 +4,34 @@
   import Header from "./Header.svelte";
 
   let todos = [];
+  $: hasTodos = todos.length > 0;
+  $: allCompleted = todos.every((todo) => todo.completed);
+
   function addTodo(newTodoText) {
     todos = [...todos, { id: uuid(), text: newTodoText, completed: false }];
   }
+
   function toggleTodo(id) {
     todos = todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
   }
 
-  $: hasTodos = todos.length > 0;
+  function toggleAll() {
+    todos = todos.map((todo) => ({ ...todo, completed: !allCompleted }));
+  }
 </script>
 
 <section class="todoapp">
   <Header {addTodo} />
   {#if hasTodos}
     <section class="main">
-      <input id="toggle-all" class="toggle-all" type="checkbox" />
+      <input
+        id="toggle-all"
+        class="toggle-all"
+        type="checkbox"
+        on:click={toggleAll}
+        checked={allCompleted} />
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         {#each todos as todo}
