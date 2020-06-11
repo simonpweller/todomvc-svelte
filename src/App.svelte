@@ -1,10 +1,16 @@
 <script>
+  import { v4 as uuid } from "uuid";
   import Todo from "./Todo.svelte";
   import Header from "./Header.svelte";
 
   let todos = [];
   function addTodo(newTodoText) {
-    todos = [...todos, { text: newTodoText }];
+    todos = [...todos, { id: uuid(), text: newTodoText, completed: false }];
+  }
+  function toggleTodo(id) {
+    todos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
   }
 
   $: hasTodos = todos.length > 0;
@@ -18,7 +24,7 @@
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         {#each todos as todo}
-          <Todo {...todo} />
+          <Todo {...todo} {toggleTodo} />
         {/each}
       </ul>
     </section>
