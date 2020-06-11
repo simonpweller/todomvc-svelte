@@ -1,28 +1,17 @@
 <script>
   import Todo from "./Todo.svelte";
+  import Header from "./Header.svelte";
+
   let todos = [];
-  let newTodoText = "";
-  function addTodo() {
-    if (newTodoText.trim().length > 0) {
-      todos = [...todos, { text: newTodoText.trim() }];
-      newTodoText = "";
-    }
+  function addTodo(newTodoText) {
+    todos = [...todos, { text: newTodoText }];
   }
 
   $: hasTodos = todos.length > 0;
 </script>
 
 <section class="todoapp">
-  <header class="header">
-    <h1>todos</h1>
-    <input
-      class="new-todo"
-      placeholder="What needs to be done?"
-      autofocus
-      bind:value={newTodoText}
-      on:keypress={(e) => e.key === 'Enter' && addTodo()}
-      on:blur={addTodo} />
-  </header>
+  <Header {addTodo} />
   {#if hasTodos}
     <section class="main">
       <input id="toggle-all" class="toggle-all" type="checkbox" />
