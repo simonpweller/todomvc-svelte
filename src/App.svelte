@@ -31,6 +31,16 @@
     );
   }
 
+  function updateTodoText(id, newText) {
+    const todoIndex = todos.findIndex((todo) => todo.id === id);
+    const nextTodos = [...todos];
+    nextTodos.splice(todoIndex, 1, {
+      ...todos[todoIndex],
+      text: newText,
+    });
+    todos = nextTodos;
+  }
+
   function toggleAll() {
     todos = todos.map((todo) => ({ ...todo, completed: !allCompleted }));
   }
@@ -49,7 +59,7 @@
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         {#each todos as todo}
-          <Todo {...todo} {toggleTodo} {deleteTodo} />
+          <Todo {...todo} {toggleTodo} {deleteTodo} {updateTodoText} />
         {/each}
       </ul>
     </section>
