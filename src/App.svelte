@@ -2,10 +2,12 @@
   import { v4 as uuid } from "uuid";
   import Todo from "./Todo.svelte";
   import Header from "./Header.svelte";
+  import TodoCount from "./TodoCount.svelte";
 
   let todos = [];
   $: hasTodos = todos.length > 0;
-  $: allCompleted = todos.every((todo) => todo.completed);
+  $: activeTodoCount = todos.filter((todo) => !todo.completed).length;
+  $: allCompleted = activeTodoCount === 0;
 
   function addTodo(newTodoText) {
     todos = [...todos, { id: uuid(), text: newTodoText, completed: false }];
@@ -40,10 +42,7 @@
       </ul>
     </section>
     <footer class="footer">
-      <span class="todo-count">
-        <strong>0</strong>
-        item left
-      </span>
+      <TodoCount count={activeTodoCount} />
       <ul class="filters">
         <li>
           <a class="selected" href="#/">All</a>
