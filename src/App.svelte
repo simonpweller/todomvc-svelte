@@ -7,6 +7,7 @@
   let todos = [];
   $: hasTodos = todos.length > 0;
   $: activeTodoCount = todos.filter((todo) => !todo.completed).length;
+  $: anyCompleted = todos.some((todo) => todo.completed);
   $: allCompleted = activeTodoCount === 0;
 
   function addTodo(newTodoText) {
@@ -15,6 +16,10 @@
 
   function deleteTodo(id) {
     todos = todos.filter((todo) => todo.id !== id);
+  }
+
+  function deleteCompleted() {
+    todos = todos.filter((todo) => !todo.completed);
   }
 
   function toggleTodo(id) {
@@ -58,7 +63,11 @@
           <a href="#/completed">Completed</a>
         </li>
       </ul>
-      <button class="clear-completed">Clear completed</button>
+      {#if anyCompleted}
+        <button class="clear-completed" on:click={deleteCompleted}>
+          Clear completed
+        </button>
+      {/if}
     </footer>
   {/if}
 </section>
