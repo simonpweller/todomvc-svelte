@@ -4,5 +4,5 @@
 
 <span class="todo-count">
   <strong>{count}</strong>
-  item{count !== 1 ? 's' : ''} left
+  {count === 1 ? 'item' : 'items'} left
 </span>
