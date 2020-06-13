@@ -6,9 +6,11 @@
   import ClearCompletedButton from "./ClearCompletedButton.svelte";
 
   let todos = [];
-  $: hasTodos = todos.length > 0;
+  $: todoCount = todos.length;
   $: activeTodoCount = todos.filter((todo) => !todo.completed).length;
-  $: anyCompleted = todos.some((todo) => todo.completed);
+
+  $: hasTodos = todoCount > 0;
+  $: hasCompleted = hasTodos && activeTodoCount < todoCount;
   $: allCompleted = activeTodoCount === 0;
 
   function addTodo(newTodoText) {
@@ -64,7 +66,7 @@
           <a href="#/completed">Completed</a>
         </li>
       </ul>
-      {#if anyCompleted}
+      {#if hasCompleted}
         <ClearCompletedButton {deleteCompleted} />
       {/if}
     </footer>
