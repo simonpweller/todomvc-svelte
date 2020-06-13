@@ -5,7 +5,9 @@
   import TodoCount from "./TodoCount.svelte";
   import ClearCompletedButton from "./ClearCompletedButton.svelte";
 
-  let todos = [];
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  $: localStorage.setItem("todos", JSON.stringify(todos));
+
   $: todoCount = todos.length;
   $: activeTodoCount = todos.filter((todo) => !todo.completed).length;
 
