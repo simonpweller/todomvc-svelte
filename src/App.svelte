@@ -3,6 +3,7 @@
   import Todo from "./Todo.svelte";
   import Header from "./Header.svelte";
   import TodoCount from "./TodoCount.svelte";
+  import ClearCompletedButton from "./ClearCompletedButton.svelte";
 
   let todos = [];
   $: hasTodos = todos.length > 0;
@@ -64,9 +65,7 @@
         </li>
       </ul>
       {#if anyCompleted}
-        <button class="clear-completed" on:click={deleteCompleted}>
-          Clear completed
-        </button>
+        <ClearCompletedButton {deleteCompleted} />
       {/if}
     </footer>
   {/if}
