@@ -13,6 +13,10 @@
     todos = [...todos, { id: uuid(), text: newTodoText, completed: false }];
   }
 
+  function deleteTodo(id) {
+    todos = todos.filter((todo) => todo.id !== id);
+  }
+
   function toggleTodo(id) {
     todos = todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -37,7 +41,7 @@
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         {#each todos as todo}
-          <Todo {...todo} {toggleTodo} />
+          <Todo {...todo} {toggleTodo} {deleteTodo} />
         {/each}
       </ul>
     </section>
