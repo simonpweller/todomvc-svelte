@@ -4,6 +4,7 @@
   import Header from "./Header.svelte";
   import TodoCount from "./TodoCount.svelte";
   import ClearCompletedButton from "./ClearCompletedButton.svelte";
+  import InfoFooter from "./InfoFooter.svelte";
 
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
   $: localStorage.setItem("todos", JSON.stringify(todos));
@@ -68,18 +69,4 @@
     </footer>
   {/if}
 </section>
-<footer class="info">
-  <p>Double-click to edit a todo</p>
-  <p>
-    Template by
-    <a href="http://sindresorhus.com">Sindre Sorhus</a>
-  </p>
-  <p>
-    Created by
-    <a href="http://todomvc.com">you</a>
-  </p>
-  <p>
-    Part of
-    <a href="http://todomvc.com">TodoMVC</a>
-  </p>
-</footer>
+<InfoFooter />
