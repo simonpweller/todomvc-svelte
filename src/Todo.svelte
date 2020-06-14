@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate } from "svelte";
+  import { tick } from "svelte";
 
   export let todo;
   export let deleteTodo;
@@ -7,8 +7,6 @@
   let editedText = todo.text;
   let editing = false;
   let input;
-
-  afterUpdate(() => editing && input && input.focus());
 
   function finishEditing() {
     editing = false;
@@ -19,6 +17,12 @@
     } else {
       deleteTodo(todo.id);
     }
+  }
+
+  async function startEditing() {
+    editing = true;
+    await tick();
+    input.focus();
   }
 
   function cancelEditing() {
@@ -34,7 +38,7 @@
       type="checkbox"
       checked={todo.completed}
       on:change={() => (todo.completed = !todo.completed)} />
-    <label on:dblclick={() => (editing = true)}>{todo.text}</label>
+    <label on:dblclick={startEditing}>{todo.text}</label>
     <button class="destroy" on:click={() => deleteTodo(todo.id)} />
   </div>
   <input
