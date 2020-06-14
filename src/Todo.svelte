@@ -2,18 +2,11 @@
   import { afterUpdate } from "svelte";
 
   export let todo;
-  export let toggleTodo;
   export let deleteTodo;
-  export let updateTodoText;
 
-  let { id, text, completed } = todo;
-  let editedText = text;
+  let editedText = todo.text;
   let editing = false;
   let input;
-
-  $: id = todo.id;
-  $: text = todo.text;
-  $: completed = todo.completed;
 
   afterUpdate(() => editing && input && input.focus());
 
@@ -21,28 +14,28 @@
     editing = false;
     const trimmedText = editedText.trim();
     if (trimmedText.length > 0) {
-      updateTodoText(id, trimmedText);
+      todo.text = trimmedText;
       editedText = trimmedText;
     } else {
-      deleteTodo(id);
+      deleteTodo(todo.id);
     }
   }
 
   function cancelEditing() {
     editing = false;
-    editedText = text;
+    editedText = todo.text;
   }
 </script>
 
-<li class:completed class:editing>
+<li class:completed={todo.completed} class:editing>
   <div class="view">
     <input
       class="toggle"
       type="checkbox"
-      checked={completed}
-      on:change={() => toggleTodo(id)} />
-    <label on:dblclick={() => (editing = !editing)}>{text}</label>
-    <button class="destroy" on:click={() => deleteTodo(id)} />
+      checked={todo.completed}
+      on:change={() => (todo.completed = !todo.completed)} />
+    <label on:dblclick={() => (editing = true)}>{todo.text}</label>
+    <button class="destroy" on:click={() => deleteTodo(todo.id)} />
   </div>
   <input
     class="edit"
