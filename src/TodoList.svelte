@@ -4,6 +4,7 @@
   import Header from "./Header.svelte";
   import TodoCount from "./TodoCount.svelte";
   import ClearCompletedButton from "./ClearCompletedButton.svelte";
+  import InfoFooter from "./InfoFooter.svelte";
 
   export let filter;
 
@@ -80,3 +81,4 @@
     </footer>
   {/if}
 </section>
+<InfoFooter />

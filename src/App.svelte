@@ -1,10 +1,14 @@
 <script>
-  import Router from "./Router.svelte";
+  import { Router } from "director/build/director";
   import TodoList from "./TodoList.svelte";
-  import InfoFooter from "./InfoFooter.svelte";
+
+  let filter = null;
+  const router = new Router({
+    "/active": () => (filter = "active"),
+    "/completed": () => (filter = "completed"),
+    "/": () => (filter = null),
+  });
+  router.init();
 </script>
 
-<Router let:filter>
-  <TodoList {filter} />
-</Router>
-<InfoFooter />
+<TodoList {filter} />
