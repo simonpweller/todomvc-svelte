@@ -60,8 +60,8 @@
         checked={allCompleted} />
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        {#each todos as todo}
-          <Todo {...todo} {toggleTodo} {deleteTodo} {updateTodoText} />
+        {#each todos as todo (todo.id)}
+          <Todo {todo} {toggleTodo} {deleteTodo} {updateTodoText} />
         {/each}
       </ul>
     </section>

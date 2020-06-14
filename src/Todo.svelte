@@ -1,16 +1,19 @@
 <script>
   import { afterUpdate } from "svelte";
 
-  export let id;
-  export let text;
-  export let completed;
+  export let todo;
   export let toggleTodo;
   export let deleteTodo;
   export let updateTodoText;
 
+  let { id, text, completed } = todo;
   let editedText = text;
   let editing = false;
   let input;
+
+  $: id = todo.id;
+  $: text = todo.text;
+  $: completed = todo.completed;
 
   afterUpdate(() => editing && input && input.focus());
 
