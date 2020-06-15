@@ -1,8 +1,8 @@
 <script>
+  import { todos } from "./stores";
   import { tick } from "svelte";
 
   export let todo;
-  export let deleteTodo;
 
   let editedText = todo.text;
   let editing = false;
@@ -12,10 +12,10 @@
     editing = false;
     const trimmedText = editedText.trim();
     if (trimmedText.length > 0) {
-      todo.text = trimmedText;
+      todos.updateTodoText(todo.id, trimmedText)
       editedText = trimmedText;
     } else {
-      deleteTodo(todo.id);
+      todos.deleteTodo(todo.id);
     }
   }
 
@@ -37,9 +37,9 @@
       class="toggle"
       type="checkbox"
       checked={todo.completed}
-      on:change={() => (todo.completed = !todo.completed)} />
+      on:change={() => todos.toggleTodo(todo.id)} />
     <label on:dblclick={startEditing}>{todo.text}</label>
-    <button class="destroy" on:click={() => deleteTodo(todo.id)} />
+    <button class="destroy" on:click={() => todos.deleteTodo(todo.id)} />
   </div>
   <input
     class="edit"
