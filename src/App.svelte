@@ -1,6 +1,5 @@
 <script>
   import { Router } from 'director/build/director';
-  import { filter } from './stores.js';
   import Header from './Header.svelte';
   import MarkAllComplete from './MarkAllComplete.svelte';
   import TodoList from './TodoList.svelte';
@@ -8,7 +7,7 @@
   import Filters from './Filters.svelte';
   import ClearCompletedButton from './ClearCompletedButton.svelte';
   import InfoFooter from './InfoFooter.svelte';
-  import { hasTodos } from './stores';
+  import { hasTodos, filter } from './stores';
 
   const router = new Router({
     '/active': () => ($filter = 'active'),
