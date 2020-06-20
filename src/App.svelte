@@ -2,9 +2,13 @@
   import { Router } from 'director/build/director';
   import { filter } from './stores.js';
   import Header from './Header.svelte';
-  import Main from './Main.svelte';
-  import Footer from './Footer.svelte';
+  import MarkAllComplete from './MarkAllComplete.svelte';
+  import TodoList from './TodoList.svelte';
+  import TodoCount from './TodoCount.svelte';
+  import Filters from './Filters.svelte';
+  import ClearCompletedButton from './ClearCompletedButton.svelte';
   import InfoFooter from './InfoFooter.svelte';
+  import { hasTodos } from './stores';
 
   const router = new Router({
     '/active': () => ($filter = 'active'),
@@ -16,7 +20,16 @@
 
 <section class="todoapp">
   <Header />
-  <Main />
-  <Footer />
+  {#if $hasTodos}
+    <section class="main">
+      <MarkAllComplete />
+      <TodoList />
+    </section>
+    <footer class="footer">
+      <TodoCount />
+      <Filters />
+      <ClearCompletedButton />
+    </footer>
+  {/if}
 </section>
 <InfoFooter />
