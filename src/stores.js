@@ -62,6 +62,7 @@ function createTodos() {
 
 export const todos = createTodos();
 export const filter = writable(null);
+export const hasTodos = derived(todos, ($todos) => $todos.length > 0);
 export const activeTodoCount = derived(
   todos,
   ($todos) => $todos.filter((todo) => !todo.completed).length
