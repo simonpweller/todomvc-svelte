@@ -1,7 +1,9 @@
 <script>
-  export let deleteCompleted;
+  import { todos, hasCompleted } from './stores';
 </script>
 
-<button class="clear-completed" on:click={deleteCompleted}>
-  Clear completed
-</button>
+{#if $hasCompleted}
+  <button class="clear-completed" on:click={todos.deleteCompleted}>
+    Clear completed
+  </button>
+{/if}
