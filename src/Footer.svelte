@@ -2,12 +2,12 @@
   import TodoCount from './TodoCount.svelte';
   import Filters from './Filters.svelte';
   import ClearCompletedButton from './ClearCompletedButton.svelte';
-  import { hasTodos, activeTodoCount } from './stores';
+  import { hasTodos } from './stores';
 </script>
 
 {#if $hasTodos}
   <footer class="footer">
-    <TodoCount count={$activeTodoCount} />
+    <TodoCount />
     <Filters />
     <ClearCompletedButton />
   </footer>
