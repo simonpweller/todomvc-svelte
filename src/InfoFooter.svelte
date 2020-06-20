@@ -6,7 +6,7 @@
   </p>
   <p>
     Created by
-    <a href="http://todomvc.com">Simon Weller</a>
+    <a href="https://www.sweller.de">Simon Weller</a>
   </p>
   <p>
     Part of
