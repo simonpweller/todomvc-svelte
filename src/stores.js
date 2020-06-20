@@ -69,3 +69,12 @@ export const activeTodoCount = derived(
 export const hasCompleted = derived(todos, ($todos) =>
   $todos.some((todo) => todo.completed)
 );
+export const allCompleted = derived(todos, ($todos) =>
+  $todos.every((todo) => todo.completed)
+);
+export const visibleTodos = derived([todos, filter], ([$todos, $filter]) => {
+  if (!$filter) return $todos;
+  return $todos.filter((todo) =>
+    $filter === 'completed' ? todo.completed : !todo.completed
+  );
+});

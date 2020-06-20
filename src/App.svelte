@@ -11,4 +11,4 @@
   router.init();
 </script>
 
-<TodoList filter={$filter} />
+<TodoList />
