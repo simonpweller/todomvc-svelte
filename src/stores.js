@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
 function createTodos() {
   const { subscribe, update } = writable(
@@ -61,3 +61,11 @@ function createTodos() {
 }
 
 export const todos = createTodos();
+export const filter = writable(null);
+export const activeTodoCount = derived(
+  todos,
+  ($todos) => $todos.filter((todo) => !todo.completed).length
+);
+export const hasCompleted = derived(todos, ($todos) =>
+  $todos.some((todo) => todo.completed)
+);

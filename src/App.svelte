@@ -1,14 +1,14 @@
 <script>
-  import { Router } from "director/build/director";
-  import TodoList from "./TodoList.svelte";
+  import { Router } from 'director/build/director';
+  import TodoList from './TodoList.svelte';
+  import { filter } from './stores.js';
 
-  let filter = null;
   const router = new Router({
-    "/active": () => (filter = "active"),
-    "/completed": () => (filter = "completed"),
-    "/": () => (filter = null),
+    '/active': () => ($filter = 'active'),
+    '/completed': () => ($filter = 'completed'),
+    '/': () => ($filter = null),
   });
   router.init();
 </script>
 
-<TodoList {filter} />
+<TodoList filter={$filter} />
