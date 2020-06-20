@@ -1,9 +1,10 @@
 <script>
-  export let addTodo;
+  import { todos } from './stores';
+  
   let newTodoText = "";
   function handleSubmit() {
     if (newTodoText.trim().length > 0) {
-      addTodo(newTodoText.trim());
+      todos.addTodo(newTodoText.trim());
       newTodoText = "";
     }
   }
